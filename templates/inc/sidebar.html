@@ -1,0 +1,10 @@
+{% load person_tags %}
+
+<div class="list-group">
+    {% get_list_proffesion as proffesion %}
+    {% for prof in proffesion %}
+    <a href="{% url 'Profession' prof.id %}" class="list-group-item list-group-item-action">
+        {{ prof.title }} <span class="badge bg-primary rounded-pill" style="width: 30px">14</span>
+    </a>
+    {% endfor %}
+</div>

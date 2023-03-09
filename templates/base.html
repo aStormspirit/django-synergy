@@ -1,0 +1,93 @@
+<!doctype html>
+{% load static %}
+{% include 'inc/_nav.html' %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Новости со всего мира{% endblock %}</title>
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+</head>
+<body>
+
+<div id="root"></div>
+<div class="container mt-3">
+    <h1>{{ title }}</h1>
+    <div class="row">
+        <div class="col-md-4">
+            {% block sidebar %}SIDEBAR{% endblock %}
+        </div>
+
+        {% if messages %}
+        {% for message in messages %}
+        {% if message.tag == 'error' %}
+        <div class="alert alert-danger" role="alert">
+            {{ message }}
+        </div>
+        {% else %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+
+
+        <div class="col-md-8">
+            {% block content %}CONTENT{% endblock %}
+        </div>
+    </div>
+</div>
+{% if page_obj.has_other_pages %}
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        {% if page_obj.has_previous %}
+        <li class="page-item disabled">
+            <a class="page-link" href="?page={{ page.obj.previous_page_number }}">Пред...</a>
+        </li>
+        {% endif %}
+        {% for p in page_obj.paginator.page_range %}
+        {% if page_obj.number == p %}
+        <li class="page-item active" aria-current="page">
+            <a class="page-link" href="?page={{ p }}">{{ p }}<span class="sr-only"> (current) </span></a>
+        </li>
+        {% elif p > page_obj.number|add:-3 and p < page_obj.number|add:3 %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ p }}">{{ p }}</a>
+        </li>
+        {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+        <li class="page-item disabled">
+            <a class="page-link" href="?page={{ page.obj.next_page_number }}">След...</a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+{% endif %}
+
+
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"/>
+
+<script src="{% static 'js/main.js' %}"></script>
+
+<script type="text/babel">
+function MyApp() {
+   let count = 0
+   console.log(count)
+   return (<button>Кнопка {count}</button>)
+}
+
+const container = document.getElementById('root');
+const root = ReactDOM.createRoot(container);
+root.render(<MyApp />);
+</script>
+
+<!--<script src="{% static 'js/main.js' %}"/>-->
+
+</body>
+</html>

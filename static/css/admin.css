@@ -1,0 +1,16 @@
+#header .module h2, .module caption, .inline-group h2{
+    background: #333333;
+    color: #fff;
+}
+
+.module > table {
+    width: 100%;
+}
+
+.main > .content {
+    background-color: burlywood !important;
+}
+
+#branding h1{
+    color: #111;
+}

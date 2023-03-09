@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% include 'inc/nav.html' %}
+
+{% block title %}
+    {{ title }} :: {{ block.super }}
+{% endblock %}
+
+
+{% block sidebar %}
+            <div class="list-group">
+                {% for prof in profession %}
+                <a href="{% url 'Profession' prof.id %}" class="list-group-item list-group-item-action">
+                    {{ prof.title }}
+                </a>
+                {% endfor %}
+            </div>
+{% endblock %}
+
+{% block content %}
+
+            {% for person in human %}
+            <div class="card text-center">
+                <div class="card-header">
+                    Профессия: <a href="#">{{ prof.title }}</a>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title {% cycle 'text-success' 'text-danger' 'text-primary' %}">{{ person.name }}</h5>
+                    <p class="card-text">{{ person.age }}</p>
+                    <a href="#" class="btn btn-primary">Read more...</a>
+                </div>
+                <div class="card-footer text-muted">
+                    {{ person.birthday|date:'Y-m-d H:M' }}
+                </div>
+            </div>
+            {% endfor %}
+
+{% endblock %}

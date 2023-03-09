@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% include 'inc/_nav.html' %}
+
+{% block title %}
+    {{ title }} :: {{ block.super }}
+{% endblock %}
+
+
+{% block sidebar %}
+{% include 'inc/sidebar.html' %}
+{% endblock %}
+
+{% block content %}
+
+    {% for person in human %}
+            <div class="card text-center">
+                <div class="card-header">
+                    Профессия: <a href="#">{{ person.profession.title }}</a>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title {% cycle 'text-success' 'text-danger' 'text-primary' %}">{{ person.name }}</h5>
+                    <p class="card-text">{{ person.age }}</p>
+                    <a href="#" class="btn btn-primary">Read more...</a>
+                </div>
+                <div class="card-footer text-muted">
+                    {{ person.birthday|date:'Y-m-d H:M' }}
+                </div>
+            </div>
+            {% endfor %}
+
+{% endblock %}
