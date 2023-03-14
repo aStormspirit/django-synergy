@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-mzouzykomi(x4nnu^7-imlx-hn3fj=rax5gj4wu(!a*=&loqc5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app']
+ALLOWED_HOSTS = ['.vercel.app', 'localhost']
 
 # Application definition
 
@@ -81,11 +81,16 @@ WSGI_APPLICATION = 'NewsProject.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+  'default': {
+    'ENGINE': 'django.db.backends.postgresql',
+    'NAME': 'synergy',
+    'USER': 'shinkarenkovova',
+    'PASSWORD': 'WMPSf4pLYt7D',
+    'HOST': 'ep-shrill-mountain-264550.eu-central-1.aws.neon.tech',
+    'PORT': '',
+  }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
